@@ -1,0 +1,6 @@
+[Server]
+server_address=http://35.157.123.41
+
+[Vim]
+vimrc=~/.vimrc
+localRcs=~/.rcsync/local

@@ -3,6 +3,7 @@
 
 Usage:
     rcsync.py login [<username>] [<password>]
+    rcsync.py configure [--default]
 
 Options:
     -h --help   Show this screen
@@ -10,9 +11,11 @@ Options:
 """
 from docopt import docopt
 from loginCommand import loginCommand
+from configCommand import configCommand
 
 commands = {
-    'login': loginCommand
+    'login': loginCommand,
+    'configure': configCommand
 }
 
 def stripAngleBrackets(string):
