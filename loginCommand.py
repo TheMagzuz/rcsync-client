@@ -3,12 +3,11 @@ import getpass
 import configparser
 import jwTokens
 
-config = configparser.ConfigParser()
-
-config.read('config.ini')
-server_address = config['Server']['server_address']
-
 def loginCommand(args):
+    config = configparser.ConfigParser()
+
+    config.read('config.ini')
+    server_address = config['Server']['server_address']
     if args['username']:
         if not args['password']:
             password = loginPrompt(True)
