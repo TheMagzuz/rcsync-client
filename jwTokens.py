@@ -9,7 +9,6 @@ def token():
     return _token
 
 def updateToken():
-    print('update')
     global _token
     try:
         with open('token.dat', 'r') as f:
