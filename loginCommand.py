@@ -2,12 +2,9 @@ import requests
 import getpass
 import configparser
 import jwTokens
+import os
 
 def loginCommand(args):
-    config = configparser.ConfigParser()
-
-    config.read('config.ini')
-    server_address = config['Server']['server_address']
     if args['username']:
         if not args['password']:
             password = loginPrompt(True)
@@ -31,18 +28,28 @@ def durationPrompt():
     return duration == 'y'
 
 def login(username, password, longToken):
+    config = configparser.ConfigParser()
+    config.read('config.ini')
+    server_address = config['Server']['server_address']
+
     res = requests.post(server_address + '/users/login', data = {'username': username, 'password': password, 'rememberMe': longToken})
 
     if res.status_code == 401:
         print('Invalid login')
         return False
     elif res.status_code != 200:
-        print('Something went wrong! Error code ' + res.status_code)
+        print('Something went wrong! Error code ' + str(res.status_code))
         return False
 
     token = res.text[1::][0:-1:]
 
-    with open('token.dat', 'w') as tokenFile:
+    token_path = os.path.expanduser(config['User']['token_path'])
+    token_folder = os.path.dirname(token_path)
+
+    if not os.path.exists(token_folder):
+        os.makedirs(token_folder)
+
+    with open(token_path, 'w+') as tokenFile:
         tokenFile.write(token)
 
     print('Logged in as ' + username)
