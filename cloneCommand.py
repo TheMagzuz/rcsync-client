@@ -1,7 +1,10 @@
 import shutil
 import os
+import configparser
 
 def cloneCommand(args):
+    config = configparser.ConfigParser()
+    config.read('config.ini')
 
     to_path = os.path.expanduser(config['Vim']['local_rcs'] + f'/{args["to"]}')
     rc_folder = os.path.dirname(to_path)

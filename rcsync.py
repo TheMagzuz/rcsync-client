@@ -7,6 +7,7 @@ Usage:
     rcsync.py download <owner> <id>
     rcsync.py clone <to>
     rcsync.py clone <from> <to>
+    rcsync.py select <rc>
 
 Options:
     -h --help   Show this screen
@@ -17,12 +18,14 @@ from loginCommand import loginCommand
 from configCommand import configCommand
 from downloadCommand import downloadCommand
 from cloneCommand import cloneCommand
+from selectCommand import selectCommand
 
 commands = {
     'login': loginCommand,
     'configure': configCommand,
     'download': downloadCommand,
-    'clone': cloneCommand
+    'clone': cloneCommand,
+    'select': selectCommand
 }
 
 def stripAngleBrackets(string):
