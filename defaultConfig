@@ -1,5 +1,5 @@
 [Server]
-server_address=http://35.157.123.41
+server_address=http://35.157.123.41:24593
 
 [Vim]
 vimrc=~/.vimrc
