@@ -8,6 +8,7 @@ Usage:
     rcsync.py clone <to>
     rcsync.py clone <from> <to>
     rcsync.py select <rc>
+    rcsync.py upload [<rc>]
 
 Options:
     -h --help   Show this screen
@@ -19,13 +20,15 @@ from configCommand import configCommand
 from downloadCommand import downloadCommand
 from cloneCommand import cloneCommand
 from selectCommand import selectCommand
+from uploadCommand import uploadCommand
 
 commands = {
     'login': loginCommand,
     'configure': configCommand,
     'download': downloadCommand,
     'clone': cloneCommand,
-    'select': selectCommand
+    'select': selectCommand,
+    'upload': uploadCommand
 }
 
 def stripAngleBrackets(string):
@@ -35,7 +38,7 @@ def stripAngleBrackets(string):
         string = string[0:-1:]
     return string
 
-args = docopt(__doc__, version='RCSync Client 0.1')
+args = docopt(__doc__, version='RCSync Client 1.0')
 
 # Make the arguments list not garbage
 args = {stripAngleBrackets(key): value for (key, value) in args.items()}
