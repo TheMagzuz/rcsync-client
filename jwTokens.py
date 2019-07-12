@@ -1,4 +1,6 @@
 import jwt
+import os
+import configparser
 
 _token=None
 
@@ -11,7 +13,11 @@ def token():
 def updateToken():
     global _token
     try:
-        with open('token.dat', 'r') as f:
+        config = configparser.ConfigParser()
+        config.read('config.ini')
+
+        token_path = os.path.expanduser(config['User']['token_path'])
+        with open(token_path, 'r') as f:
             _token = f.read()
     except:
         return None
