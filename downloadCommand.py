@@ -7,10 +7,11 @@ def downloadCommand(args):
     config = configparser.ConfigParser()
     config.read('config.ini')
 
-    if jwTokens.token():
-        res = requests.get(config['Server']['server_address'] + f'/rc/{args["owner"]}/{args["id"]}', headers={'Authorization': 'Bearer ' + jwTokens.token()})
-    else:
-        res = requests.get(config['Server']['server_address'] + f'/rc/{args["owner"]}/{args["id"]}')
+    if not jwTokens.token():
+        print('Please login first')
+        return
+
+    res = requests.get(config['Server']['server_address'] + f'/rc/{args["owner"]}/{args["id"]}', headers={'Authorization': 'Bearer ' + jwTokens.token()})
 
     rc_name = f'{args["owner"]}-{args["id"]}'
 
